@@ -6,9 +6,10 @@ class Enemy
     private $hitPoint = 50; //現在のHP
     private $attackPoint = 10; //攻撃力
 
-    public function __construct($name)
+    public function __construct($name, $attackPoint)
     {
         $this->name = $name;
+        $this->attackPoint = $attackPoint; //この行を追加
     }
 
     public function getName()
@@ -26,8 +27,15 @@ class Enemy
         return $this->attackPoint;
     }
 
-    public function doAttack($human)
+    public function doAttack($humans)
     {
+        //チェック１：自身のHPが0かどうか
+        if($this->getHitPoint() <= 0) {
+            return false;
+        }
+
+        $humanIndex = rand(0, count($humans) -1);
+        $human = $humans[$humanIndex];
         echo "『" . $this->getName() . "』の攻撃！\n";
         echo "『" . $human->getName() . "』に" . $this->attackPoint . "のダメージ!\n";
         $human->tookDamage($this->attackPoint);
