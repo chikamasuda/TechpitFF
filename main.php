@@ -2,6 +2,7 @@
 
 //echo "処理のはじまりはじまり〜!\n\n";
 //ファイルのロード
+require_once('./classes/Lives.php');
 require_once('./classes/Human.php');
 require_once('./classes/Enemy.php');
 require_once('./classes/Brave.php');
@@ -56,7 +57,7 @@ while (!$isFinishFlg) {
     //敵の攻撃
     $messageObj->displayAttackMessage($enemies, $members);
 
-    //戦闘終了条件のチェック　仲間全員のHPが0, または敵全員のHPが０
+    //戦闘終了条件のチェック 仲間全員のHPが0, または敵全員のHPが０
     $isFinishFlag = isFinish($members);
     if($isFinishFlag) {
         $message = "GAME OVER ....\n\n";
@@ -72,6 +73,9 @@ while (!$isFinishFlg) {
 }
 
 echo "★★★ 戦闘終了 ★★★\n\n";
+
+echo $message;
+
 // 仲間の表示
 $messageObj->displayStatusMessage($members);
 
